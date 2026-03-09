@@ -70,7 +70,7 @@ hamburger.addEventListener('click', () => {
 
 // Typing animation
 const typingText = document.querySelector('.typing-text');
-const texts = ['Développeur Front End', 'UI / UX Designer'];
+const texts = ['Développeur Front End', 'UI / UX Designer' , 'Developpeur Back End' , 'Data IA'];
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;

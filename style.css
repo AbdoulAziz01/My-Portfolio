@@ -754,11 +754,56 @@ section {
     margin-bottom: 0.5rem;
 }
 
+.project-category a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.project-category a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Style spécifique pour le lien Azelie */
+.project-category a[href="#"] {
+    color: #ffd700 !important;
+    font-weight: 600;
+}
+
 .project-title {
     font-size: 1.5rem;
     font-weight: 600;
     color: #e2e8f0;
     margin-bottom: 1rem;
+}
+
+.project-title a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.project-title a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    transition: width 0.3s ease;
+}
+
+.project-title a:hover {
+    color: #ffd700;
+    transform: translateY(-2px);
+}
+
+.project-title a:hover::before {
+    width: 100%;
 }
 
 .project-description {
