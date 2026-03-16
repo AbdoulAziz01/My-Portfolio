@@ -55,22 +55,7 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(skillsSection);
 
-// La partie suivante gère la soumission du formulaire de contact. Actuellement, elle affiche une alerte pour indiquer que le message a été envoyé, mais la fonctionnalité d'envoi de message doit être implémentée.
-document.querySelector(".form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Message envoyé ! (Fonctionnalité à implémenter)");
-});
-
-// Mobile menu
-const hamburger = document.querySelector(".hamburger");
-const navLinksContainer = document.querySelector(".nav-links");
-
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  navLinksContainer.classList.toggle("active");
-});
-
-// L'animation de la section d'introduction, qui affiche les différents rôles de manière dynamique
+ique;
 const typingText = document.querySelector(".typing-text");
 const texts = [
   "Développeur Front End",
