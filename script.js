@@ -55,7 +55,17 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(skillsSection);
 
-ique;
+
+// Mobile menu
+const hamburger = document.querySelector(".hamburger");
+const navLinksContainer = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navLinksContainer.classList.toggle("active");
+});
+
+// L'animation de la section d'introduction, qui affiche les différents rôles de manière dynamique
 const typingText = document.querySelector(".typing-text");
 const texts = [
   "Développeur Front End",
