@@ -669,32 +669,102 @@ section {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-.project-card.featured {
-    grid-column: span 2;
-}
-
 .project-image {
-    height: 250px;
+    height: 260px;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
 }
 
 .project-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0f1419;
-    font-size: 3rem;
-    transition: transform 0.3s ease;
+    padding: 1.4rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-placeholder img {
+/* --- Mockups réalistes : chaque capture s'affiche entière, dans son contexte
+   (fenêtre de navigateur pour le web, châssis de téléphone pour le mobile),
+   plutôt que recadrée à l'aveugle dans un rectangle qui ignore ses proportions. --- */
+.mockup {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mockup-browser {
+    width: 100%;
+    background: #11151c;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mockup-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: #0c0f14;
+}
+
+.mockup-bar span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.mockup-bar span:nth-child(1) { background: #ff5f57; }
+.mockup-bar span:nth-child(2) { background: #febc2e; }
+.mockup-bar span:nth-child(3) { background: #28c840; }
+
+.mockup-browser .mockup-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.mockup-phone {
+    height: 100%;
+    display: flex;
+    background: #11151c;
+    border-radius: 26px;
+    padding: 8px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mockup-phone .mockup-screen {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.mockup-phone .mockup-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38%;
+    height: 14px;
+    background: #11151c;
+    border-radius: 0 0 10px 10px;
+    z-index: 2;
+}
+
+.mockup-screen img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
+    display: block;
 }
 
 .project-overlay {
@@ -716,7 +786,7 @@ section {
 }
 
 .project-card:hover .project-placeholder {
-    transform: scale(1.1);
+    transform: scale(1.04);
 }
 
 .project-links {
@@ -1073,10 +1143,6 @@ section {
     .skills-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
-    }
-    
-    .project-card.featured {
-        grid-column: span 1;
     }
     
     .contact-content {
