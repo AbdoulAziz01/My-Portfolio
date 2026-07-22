@@ -215,7 +215,7 @@ body {
 .cursor {
     animation: blink 1s infinite;
 }
-// Animation pour le curseur clignotant
+/* Animation pour le curseur clignotant */
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
@@ -407,7 +407,7 @@ body {
     border-top: 8px solid #ffd700;
 }
 
-// Animation pour le mouvement de la flèche
+/* Animation pour le mouvement de la flèche */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
     40% { transform: translateY(-10px); }
@@ -1124,4 +1124,452 @@ section {
     }
 }
 
-// FIN DU JOBBBBBBBBBBBBBBBB
+/* ============================================================
+   PREMIUM ENHANCEMENTS
+   Ajouts non destructifs : profondeur, motion design, micro-interactions.
+   Conserve la palette et la structure existantes.
+   ============================================================ */
+
+/* --- Hero : mesh gradient animé + parallaxe souris --- */
+.hero-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(600px circle at 20% 25%, rgba(255, 215, 0, 0.14), transparent 60%),
+        radial-gradient(500px circle at 82% 20%, rgba(255, 140, 0, 0.12), transparent 60%),
+        radial-gradient(650px circle at 50% 95%, rgba(255, 215, 0, 0.08), transparent 60%);
+    filter: blur(30px);
+    animation: meshDrift 20s ease-in-out infinite alternate;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform;
+}
+
+@keyframes meshDrift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-2%, 2%, 0) scale(1.06); }
+    100% { transform: translate3d(2%, -2%, 0) scale(1.02); }
+}
+
+.hero-image {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+/* --- Révélation au scroll --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Boutons : lumière dynamique + magnétisme --- */
+.btn,
+.social-link {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.social-link i {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover i {
+    transform: scale(1.18) rotate(-6deg);
+}
+
+/* --- Section titres : soulignement animé au survol du numéro --- */
+.section-number {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-header:hover .section-number {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 215, 0, 0.25);
+}
+
+/* --- Projets : profondeur, reflet, tilt --- */
+.project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -160%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.project-card:hover::before {
+    left: 160%;
+}
+
+.projects-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.btn-more {
+    background: rgba(255, 215, 0, 0.08);
+    color: #ffd700;
+    border: 2px solid rgba(255, 215, 0, 0.35);
+}
+
+.btn-more:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    color: #0f1419;
+    transform: translateY(-2px);
+}
+
+.btn-more .fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.btn-more.is-open .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.project-card.project-extra {
+    display: none;
+}
+
+.project-card.project-extra.is-shown {
+    display: block;
+}
+
+/* --- Respect des préférences de mouvement réduit --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text,
+    .hero-image {
+        transform: none !important;
+    }
+}
+
+/* ============================================================
+   STUDIO POLISH PASS
+   Détails de finition : continuité de scroll, texte cinétique,
+   lumière volumétrique, profondeur, interactions raffinées.
+   Chaque effet sert une intention précise (voir commentaires).
+   ============================================================ */
+
+/* --- Barre de progression : matérialise l'avancement de lecture --- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #ffd700, #ff8c00);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.55);
+    z-index: 1001;
+    will-change: width;
+}
+
+/* --- Indicateur de navigation glissant : ancre la position dans le parcours --- */
+.nav-links {
+    position: relative;
+}
+
+.nav-indicator {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    transition: left 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                width 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .nav-indicator {
+        display: none;
+    }
+}
+
+/* --- Continuité entre sections : évite les coupures nettes de fond --- */
+section {
+    position: relative;
+}
+
+section:not(.hero)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, 70%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.35), transparent);
+}
+
+/* --- Curseur personnalisé : renforce la sensation de produit soigné (desktop uniquement) --- */
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2000;
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 0;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #ffd700;
+    transition: opacity 0.25s ease;
+}
+
+.cursor-ring {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid rgba(255, 215, 0, 0.5);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease, background 0.3s ease, opacity 0.25s ease;
+}
+
+.cursor-ring.is-active {
+    width: 56px;
+    height: 56px;
+    border-color: rgba(255, 215, 0, 0.9);
+    background: rgba(255, 215, 0, 0.08);
+}
+
+body.cursor-ready.cursor-visible .cursor-dot,
+body.cursor-ready.cursor-visible .cursor-ring {
+    opacity: 1;
+}
+
+body.cursor-ready,
+body.cursor-ready a,
+body.cursor-ready button,
+body.cursor-ready .project-card {
+    cursor: none;
+}
+
+@media (pointer: coarse) {
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+}
+
+/* --- Hero : lumière volumétrique derrière le portrait --- */
+.profile-container {
+    z-index: 0;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 140%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.25), transparent 65%);
+    filter: blur(50px);
+    z-index: -1;
+    animation: spotlightPulse 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes spotlightPulse {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+/* --- Texte cinétique : le nom se met au point lettre par lettre --- */
+.hero-name.split-active {
+    opacity: 1;
+    animation: none;
+    transform: none;
+}
+
+.hero-name .char {
+    display: inline-block;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: charIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes charIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Variantes de révélation non répétitives --- */
+.reveal[data-reveal="blur"] {
+    transform: translateY(24px);
+    filter: blur(10px);
+}
+
+.reveal[data-reveal="blur"].is-visible {
+    filter: blur(0);
+}
+
+.reveal[data-reveal="tilt"] {
+    transform: perspective(900px) rotateX(10deg) translateY(26px);
+    transform-origin: top center;
+}
+
+.reveal[data-reveal="tilt"].is-visible {
+    transform: perspective(900px) rotateX(0deg) translateY(0);
+}
+
+.reveal[data-reveal="left"] {
+    transform: translateX(-44px);
+}
+
+.reveal[data-reveal="left"].is-visible {
+    transform: translateX(0);
+}
+
+.reveal[data-reveal="right"] {
+    transform: translateX(44px);
+}
+
+.reveal[data-reveal="right"].is-visible {
+    transform: translateX(0);
+}
+
+/* --- Cartes secondaires : reflet de verre qui suit le curseur (profondeur légère, sans tilt) --- */
+.sheen-card {
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.sheen-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.09), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.sheen-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+.sheen-card:hover::after {
+    opacity: 1;
+}
+
+/* --- États hover mémorables --- */
+.tech-tag {
+    transition: transform 0.25s ease, background 0.25s ease,
+                border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tech-tag:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 215, 0, 0.18);
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
+}
+
+.stat-number {
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Magnétisme raffiné : suivi fluide en survol, rebond élastique au relâché --- */
+.btn.is-magnetic,
+.social-link.is-magnetic {
+    transition: box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.btn.is-settling,
+.social-link.is-settling {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* --- Ajustements responsives des ajouts studio --- */
+@media (max-width: 768px) {
+    section:not(.hero)::before {
+        width: 82%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+
+    body.cursor-ready,
+    body.cursor-ready a,
+    body.cursor-ready button {
+        cursor: auto;
+    }
+
+    .hero-name .char {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        animation: none;
+    }
+
+    .reveal[data-reveal="blur"],
+    .reveal[data-reveal="tilt"],
+    .reveal[data-reveal="left"],
+    .reveal[data-reveal="right"] {
+        transform: none;
+        filter: none;
+    }
+}

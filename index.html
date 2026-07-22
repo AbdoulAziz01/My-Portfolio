@@ -15,6 +15,8 @@
     />
   </head>
   <body>
+    <!-- Barre de progression de lecture -->
+    <div class="scroll-progress" aria-hidden="true"></div>
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-content">
@@ -27,6 +29,7 @@
           <li><a href="#competences" class="nav-link">Compétences</a></li>
           <li><a href="#projets" class="nav-link">Projets</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
+          <span class="nav-indicator" aria-hidden="true"></span>
         </ul>
         <!-- Mon burger visible sur telphone -->
         <div class="hamburger">
@@ -41,6 +44,7 @@
     <!-- Cercle -->
     <section id="accueil" class="hero">
       <div class="hero-background">
+        <div class="hero-mesh"></div>
         <div class="floating-shapes">
           <div class="shape shape-1"></div>
           <div class="shape shape-2"></div>
@@ -371,7 +375,7 @@
               </div>
             </div>
           </div>
-          <div class="project-card">
+          <div class="project-card project-extra">
             <div class="project-image">
               <div class="project-placeholder">
                 <img
@@ -394,7 +398,7 @@
             </div>
           </div>
           <!--  -->
-          <div class="project-card">
+          <div class="project-card project-extra">
             <div class="project-image">
               <div class="project-placeholder">
                 <img src="images/Modelica.png" alt="Modélica Style" />
@@ -418,7 +422,7 @@
               </div>
             </div>
           </div>
-          <div class="project-card">
+          <div class="project-card project-extra">
             <div class="project-image">
               <div class="project-placeholder">
                 <img src="images/fresho.png" alt="Fresh O Vitroplant" />
@@ -441,6 +445,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="projects-more-wrap">
+          <button type="button" class="btn btn-more" id="projectsToggle">
+            <span>Voir plus de projets</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
         </div>
       </div>
     </section>
